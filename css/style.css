@@ -16,7 +16,7 @@ body {
 .grid {
   align-items: center;
   box-shadow: 0 0 20px 0 rgba(0,0,0,0.2);
-  background: rgba(0,0,0,0.5);
+  background: black;
   display: flex;
   flex-grow: 1;
   flex-wrap: wrap;
@@ -31,13 +31,29 @@ body {
 flex-grow: 1;
 height: calc(100% / 11);
 width: calc(100% / 11);
-border: 2px solid black;
+border: 2px solid white;
 }
 .player{
   background-color: blue;
+  background-image: url(https://cdn0.iconfinder.com/data/icons/video-games-yellow/60/050_-_Space_Invaders-512.png);
+  background-size: contain;
 }
 
 .alien{
   background-color: red;
+  background-image: url(https://cdn.imgbin.com/25/11/14/imgbin-space-invaders-extreme-2-arcade-game-alien-invaders-from-space-space-invaders-jvuQfyDU9Pz2Q0yBb6ZLtumQ3.jpg);
+  background-size: contain;
+
+}
+.missile{
+  background-color: green;
+  background-image: url(https://www.pngfind.com/pngs/m/45-456437_nuke-clipart-missile-launch-space-invaders-missile-png.png);
+  background-size: contain;
+
+
+}
+.score{
+  width: 800px;
+  font-size: 30px;
 
 }

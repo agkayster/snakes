@@ -4,16 +4,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const grid = document.querySelector('.grid')
   const squares = []
   const width = 11
+  const score = document.querySelector('.score')
+  const startGame = document.querySelector('h1')
   let userIndex = 115
-  let alienIndex = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-  let missileIndex = 
+  let alienIndex = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
   let intervalId = null
+  let scores = 0
+  // let missileId = null
+  // let missileIndex = userIndex
 
   let direction = 1
 
   //using a let to assign null to the variable player, to use it anywhere we call player
   let player = null
+
   // let alien = null
+  // let missile = null
 
   // create grid ============================================================
   function gridForGame(){
@@ -29,28 +35,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // squares[alienIndex].classList.add('alien')
   }
-  gridForGame()
+  // gridForGame()
 
   //Make my aliens ==============================================================
   function makeAlien (){
     alienIndex.forEach(alienIndex => {
-      console.log(alienIndex, 'ai')
+      // console.log(alienIndex, 'ai')
       squares[alienIndex].classList.add('alien')
     })
 
   }
-  makeAlien()
+  // makeAlien()
 
-  //Make my missile
-  function makemissile(){
-
-  }
 
   // Moving my player ===========================================================
   function moveMyPlayer() {
     //find the player in the user index array and assign it to player
     player = squares.find(square => square.classList.contains('player'))
-    console.log(player, 'this is player =====>')
+    // console.log(player, 'this is player =====>')
     player.classList.remove('player')
     // to add back the player
     squares[userIndex].classList.add('player')
@@ -84,10 +86,43 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     },500)
   }
-  moveMyAlien()
+  // moveMyAlien()
 
+  // Creating a function 'play' and putting all relevant callbacks()===========>
+  function play(){
+    gridForGame()
+    makeAlien()
+    moveMyAlien()
+  }
 
-  // =========================================> Event Listener
+  // Move my missile ==========================================================
+
+  document.addEventListener('keydown', function (e) {
+    let missileIndex = userIndex
+    if (e.keyCode === 32) {
+      const missileId = setInterval(() => {
+        if(missileIndex - width >=0) {
+          squares[missileIndex].classList.remove('missile')
+          missileIndex -= width
+          squares[missileIndex].classList.add('missile')
+        } else {
+          squares[missileIndex].classList.remove('missile')
+        } if(squares[missileIndex].classList.contains('alien')) {
+          squares[missileIndex].classList.remove('missile', 'alien')
+          clearInterval(missileId)
+          const newAlienIndex = alienIndex.indexOf(missileIndex)
+          alienIndex.splice(newAlienIndex, 1)
+          scores++
+          console.log(score)
+          score.innerText = scores
+
+        }
+      }, 200)
+    }
+  })
+  //
+
+  // =========================================> Event Listener for moveMyPlayer
   document.addEventListener('keydown', function (e) {
     // if (!gameInPlay)
     switch(e.keyCode) {
@@ -107,7 +142,8 @@ document.addEventListener('DOMContentLoaded', () => {
         break
     }
   })
-
+  //================================================> Event listener to start games
+  startGame.addEventListener('click', play)
 
 
 
