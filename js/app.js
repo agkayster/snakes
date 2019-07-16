@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let alienIndex = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
   let intervalId = null
   let scores = 0
+  let gameInPlay = null
   // let missileId = null
   // let missileIndex = userIndex
 
@@ -93,6 +94,13 @@ document.addEventListener('DOMContentLoaded', () => {
     gridForGame()
     makeAlien()
     moveMyAlien()
+
+  }
+
+  //To reset the game==========================================================>
+
+  function reset() {
+
   }
 
   // Move my missile ==========================================================
@@ -113,7 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
           const newAlienIndex = alienIndex.indexOf(missileIndex)
           alienIndex.splice(newAlienIndex, 1)
           scores++
-          console.log(score)
+          endGame()
+          // console.log(score)
           score.innerText = scores
 
         }
@@ -144,6 +153,23 @@ document.addEventListener('DOMContentLoaded', () => {
   })
   //================================================> Event listener to start games
   startGame.addEventListener('click', play)
+  startGame.addEventListener('click', reset)
+  // userIndex = 115
+  // alienIndex = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+  // scores = 0
+  // score.innerText = 0
+  // clearInterval(intervalId)
+  // clearInterval(missileId)
+
+  //End game if all aliens are dead===================>
+  function endGame(){
+    if (alienIndex.length === 0){
+      alert('Game Over!')
+    }
+  }
+
+
+
 
 
 
