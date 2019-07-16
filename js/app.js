@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let alienIndex = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
   let intervalId = null
   let scores = 0
-  let gameInPlay = null
+  // let gameInPlay = null
   // let missileId = null
   // let missileIndex = userIndex
 
@@ -99,9 +99,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //To reset the game==========================================================>
 
-  function reset() {
-
-  }
+  //   function reset() {
+  //     if endGame = true{
+  //
+  // }
+  //   }
 
   // Move my missile ==========================================================
 
@@ -153,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
   })
   //================================================> Event listener to start games
   startGame.addEventListener('click', play)
-  startGame.addEventListener('click', reset)
+  // startGame.addEventListener('click', reset)
   // userIndex = 115
   // alienIndex = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
   // scores = 0
