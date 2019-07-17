@@ -3,9 +3,13 @@
 }
 
 body {
-  background-color:white;
+  background-image: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/7ff5aea5-5169-455c-9276-85e240f715b2/dcm39tm-9ae4a15f-ddee-44f4-b49d-5f6f3f427435.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzdmZjVhZWE1LTUxNjktNDU1Yy05Mjc2LTg1ZTI0MGY3MTViMlwvZGNtMzl0bS05YWU0YTE1Zi1kZGVlLTQ0ZjQtYjQ5ZC01ZjZmM2Y0Mjc0MzUuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.IGSN0vU_Cydb0tIq4UYolXmhA02sBv-K9rjn7JsvtDI);
+  background-repeat: no-repeat;
+  background-size: 1500px 1100px;
+  background-color:black;
   display: flex;
   height: 100vh;
+  width: 1400px;
   align-items: center;
   justify-content: center;
   margin: 0;
@@ -18,11 +22,11 @@ body {
   box-shadow: 0 0 20px 0 rgba(0,0,0,0.2);
   background: black;
   display: flex;
-  flex-grow: 1;
-  flex-wrap: wrap;
+  flex-grow:1;
+  flex-wrap:wrap;
   justify-content: center;
-  height: 600px;
-  width: 600px;
+  height: 580px;
+  width: 500px;
   border-bottom: 2px solid limegreen;
   border-radius: 9px;
 }
@@ -31,29 +35,143 @@ body {
 flex-grow: 1;
 height: calc(100% / 11);
 width: calc(100% / 11);
-border: 2px solid white;
+border: 2px solid black;
 }
+
 .player{
-  background-color: blue;
-  background-image: url(https://cdn0.iconfinder.com/data/icons/video-games-yellow/60/050_-_Space_Invaders-512.png);
-  background-size: contain;
+  background-image: url(https://ui-ex.com/images/rocket-transparent-space-invaders-2.png);
+  background-size:contain;
 }
 
 .alien{
-  background-color: red;
-  background-image: url(https://cdn.imgbin.com/25/11/14/imgbin-space-invaders-extreme-2-arcade-game-alien-invaders-from-space-space-invaders-jvuQfyDU9Pz2Q0yBb6ZLtumQ3.jpg);
+  color: red;
+  background-image: url(https://www.pinclipart.com/picdir/big/416-4164135_space-invaders-png-high-quality-image-space-invaders.png);
   background-size: contain;
 
 }
 .missile{
-  background-color: green;
-  background-image: url(https://www.pngfind.com/pngs/m/45-456437_nuke-clipart-missile-launch-space-invaders-missile-png.png);
+  background-image: url(https://s1.mzstatic.com/us/r30/Purple3/v4/d1/36/9c/d1369cde-2581-b624-9432-25f3fc7bcda3/mzl.bosvmddv.png);
   background-size: contain;
+  background-color: black;
+}
 
-
+h1{
+  color: black;
 }
 .score{
-  width: 800px;
-  font-size: 30px;
+  padding-left: -300px;
+  font-size: 25px;
+  color: yellow;
+  font-family: 'Geostar', cursive;
+  width: 19%;
+  margin-bottom: 100px;
+}
+.start{
+  font-size: 20px;
+  font-family: 'Geostar', cursive;
+  padding: -5px -5px;
+  height: 40px;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: yellow;
+  background-color: black;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+.start:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 
+.restart {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.startGame{
+  color: yellow;
+  display: flex;
+  flex-wrap: wrap;
+  width: 1000px;
+  font-size: 15px;
+  justify-content:space-between;
+  margin-left: 5px;
+}
+.space{
+  width: 400px;
+}
+.reset{
+  margin-top: 100px;
+  font-family: 'Geostar', cursive;
+  padding: -5px -5px;
+  height: 40px;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: yellow;
+  background-color: black;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+.reset:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+span{
+  margin: 10px;
+}
+.endstop{
+  font-family: 'Geostar', cursive;
+  width: 19%;
+  display: flex;
+  flex-direction: column;
+}
+.stop{
+  font-family: 'Geostar', cursive;
+  margin-bottom: 100px;
+  margin-right: 10px;
+  padding: -5px -5px;
+  height: 40px;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: yellow;
+  background-color: black;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+.stop:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.pause{
+  font-family: 'Geostar', cursive;
+  margin-bottom: 100px;
+  margin-right: 10px;
+  padding: -5px -5px;
+  height: 40px;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: yellow;
+  background-color: black;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+.pause:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }

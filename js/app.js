@@ -4,17 +4,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const grid = document.querySelector('.grid')
   const squares = []
   const width = 11
-  const score = document.querySelector('.score')
-  const startGame = document.querySelector('h1')
+  const score = document.querySelector('span')
+  const startGame = document.querySelector('.start')
+  const reset = document.querySelector('.reset')
+  const stopGame = document.querySelector('.stop')
+  const pauseGame = document.querySelector('.pause')
+  // const playAudio = document.querySelector('.sound')
   let userIndex = 115
-  let alienIndex = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+  const alienStart = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+  let alienIndex = alienStart.slice()
   let intervalId = null
   let scores = 0
+
   // let gameInPlay = null
   // let missileId = null
   // let missileIndex = userIndex
 
   let direction = 1
+
 
   //using a let to assign null to the variable player, to use it anywhere we call player
   let player = null
@@ -36,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // squares[alienIndex].classList.add('alien')
   }
-  // gridForGame()
+  gridForGame()
 
   //Make my aliens ==============================================================
   function makeAlien (){
@@ -62,54 +69,59 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Moving my Alien ============================================================
   function moveMyAlien(){
-    intervalId = setInterval(() => {
-      squares.forEach(square => square.classList.remove('alien'))
-      alienIndex = alienIndex.map(alien => alien + direction)
+    squares.forEach(square => square.classList.remove('alien'))
+    alienIndex = alienIndex.map(alien => alien + direction)
 
-      alienIndex.forEach(alien => {
-        squares[alien].classList.add('alien')
-      })
-      //when aliens reach the end of the board
-      if (alienIndex.some(alien => alien >= 110)) {
-        clearInterval(intervalId)
-      //   // endGame()
-      //   // message.textContent = 'Aliens won'
-      }
-      const atLeftEdge = alienIndex[0] % width === 0
-      const atRigthEdge = alienIndex[alienIndex.length - 1] % width === width - 1
+    alienIndex.forEach(alien => {
+      squares[alien].classList.add('alien')
+    })
+    //when aliens reach the end of the board
+    if (alienIndex.some(alien => alien >= 110)) {
+      clearInterval(intervalId)
+      endGame()
+    //   // message.textContent = 'Aliens won'
+    }
+    const atLeftEdge = alienIndex[0] % width === 0
+    const atRigthEdge = alienIndex[alienIndex.length - 1] % width === width - 1
 
-      if((atLeftEdge && direction === -1) || (atRigthEdge && direction === 1)){
-        direction = width
-      }else if (direction === width) {
-        if (atLeftEdge) direction = 1
-        else direction = -1
+    if((atLeftEdge && direction === -1) || (atRigthEdge && direction === 1)){
+      direction = width
+    }else if (direction === width) {
+      if (atLeftEdge) direction = 1
+      else direction = -1
 
-      }
-    },500)
+    }
   }
+
   // moveMyAlien()
 
+  //================================================> Event listener to start game
+  startGame.addEventListener('click', play)
+
   // Creating a function 'play' and putting all relevant callbacks()===========>
-  function play(){
-    gridForGame()
+  function play(e){
+    // gridForGame()
     makeAlien()
     moveMyAlien()
-
+    intervalId = setInterval(moveMyAlien, 500)
+    e.target.removeEventListener('click', play)
   }
 
   //To reset the game==========================================================>
-
-  //   function reset() {
-  //     if endGame = true{
-  //
-  // }
-  //   }
-
+  reset.addEventListener('click', () => {
+    alienIndex = alienStart.slice()
+    makeAlien()
+    moveMyAlien()
+    scores = 0
+    score.innerText = scores
+    clearInterval(intervalId)
+    intervalId = setInterval(moveMyAlien, 500)
+  })
   // Move my missile ==========================================================
 
   document.addEventListener('keydown', function (e) {
     let missileIndex = userIndex
-    if (e.keyCode === 32) {
+    if (e.keyCode === 38) {
       const missileId = setInterval(() => {
         if(missileIndex - width >=0) {
           squares[missileIndex].classList.remove('missile')
@@ -153,22 +165,56 @@ document.addEventListener('DOMContentLoaded', () => {
         break
     }
   })
-  //================================================> Event listener to start games
-  startGame.addEventListener('click', play)
-  // startGame.addEventListener('click', reset)
-  // userIndex = 115
-  // alienIndex = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
-  // scores = 0
-  // score.innerText = 0
-  // clearInterval(intervalId)
-  // clearInterval(missileId)
+
 
   //End game if all aliens are dead===================>
   function endGame(){
     if (alienIndex.length === 0){
-      alert('Game Over!')
+      alert('Game Over!, You won!')
+    }else if(alienIndex.some(alien => alien >= 110)){
+      alert('You lose!')
+    }else{
+      'you win'
     }
   }
+  //================================================> Event listener to stop game
+  stopGame.addEventListener('click', stopMyGame)
+
+  //Stop game function==========================================>
+  function stopMyGame(){
+    alienIndex.splice(0, alienIndex.length)
+    // alienIndex = alienStart.slice()
+    // makeAlien()
+    // moveMyAlien()
+    scores = 0
+    score.innerText = scores
+    clearInterval(intervalId)
+    squares.forEach(square => square.classList.remove('alien'))
+  }
+  // stopMyGame()
+
+  //================================================> Event listener to stop game
+  pauseGame.addEventListener('click', pauseMyGame)
+
+  //pause game function========================================>
+  function pauseMyGame(e){
+    if (e.target.innerHTML === 'PAUSE GAME') {
+      // alienIndex.splice(0, alienIndex.length)
+      // scores = 0
+      // score.innerText = scores
+      clearInterval(intervalId)
+      e.target.innerHTML = 'play'
+    } else if (e.target.innerHTML === 'play') {
+      intervalId = setInterval(moveMyAlien, 500)
+      e.target.innerHTML = 'PAUSE GAME'
+    }
+  }
+  //play game audio===================================>
+
+  // function gameSound(){
+  //   playAudio.play()
+  // }
+  // gameSound()
 
 
 
@@ -178,7 +224,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // =======================================================> End of DOM
 })
-
-// let gameInPlay = false
-// if (!gameInPlay)
-//   return false
