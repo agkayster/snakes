@@ -195,8 +195,13 @@ span{
   display: none;
 }
 .para {
-  color: white;
-  position: absolute;
+  color: red;
+  position:absolute;
+  font-size: 50px;
+  font-family: 'Geostar', cursive;
+  justify-content: center;
+  margin-bottom: 60px;
+  text-align: center;
 }
 .endmessage {
   position:absolute;

@@ -11,8 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const message = document.querySelector('.para')
   const squares = []
   const width = 11
+  const stopGame = document.querySelector('.stop')
+  const pauseGame = document.querySelector('.pause')
+  const alienStart = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27]
   let userIndex = 115
-  const alienStart = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
   let alienIndex = alienStart.slice()
   let intervalId = null
   let direction = 1
@@ -25,8 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let player = null
 
 
-  const stopGame = document.querySelector('.stop')
-  const pauseGame = document.querySelector('.pause')
+
   // const playAudio = document.querySelector('.sound')
   // let missileId = null
 
@@ -96,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         endGame()
         hidden.classList.remove('hidden')
         hidden.classList.add('endmessage')
-        message.textContent = 'You had just one job man!!! Earth has fallen!'
+        message.textContent = 'You had just one job man!!! GA has fallen!'
       }
     }
   }
@@ -235,11 +236,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (alienIndex.length === 0){
       hidden.classList.remove('hidden')
       hidden.classList.add('endmessage')
-      message.textContent = 'Well done!'
+      message.textContent = 'Well done chammp!'
     }else if(alienIndex.some(alien => alien >= 110)){
       hidden.classList.remove('hidden')
       hidden.classList.add('endmessage')
-      message.textContent = 'You lose!'
+      message.textContent = 'You lose, "cmd" + "R" to play again!'
     }else{
       // message.textContent = 'you win'
     }

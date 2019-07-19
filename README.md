@@ -35,14 +35,18 @@ How would the app know if the Players missile and Alien have collided and if the
 
 ##### Alien’s bomb collision with Player
 
+```js
 function alienCollision()
 if (currentPlayer.classList.contains('bomb')) {
-      currentPlayer.classList.remove('bomb')
-      if (lives > 0) {
-        lives—
+  currentPlayer.classList.remove('bomb')
+  if (lives > 0) {
+    lives—
+  }
+}
+```
 
 ##### Players missile collision with Alien
-
+```js
 const missileId = setInterval(() => {
 if(squares[missileIndex].classList.contains('alien')) {
           squares[missileIndex].classList.remove('missile', 'alien')
@@ -50,12 +54,15 @@ if(squares[missileIndex].classList.contains('alien')) {
           const newAlienIndex = alienIndex.indexOf(missileIndex)
           alienIndex.splice(newAlienIndex, 1)
           scores++
-
+  }
+}
+```
 #### Keypresses
 
 From the start, I set myself a little challenge to enable the user to navigate the menus, start/pause and play the game using only the keyboard.
 The user would have to manoeuvre the shuttle to avoid collision. I started off by adding clickable buttons to move left and right, it worked but wasn't exactly user friendly. Once I figured out how to add keyboard interactivity by adding an event listener to the window, I mapped out all the keyboard buttons I'd need and wrote logic to perform a function depending on which menu the user was on:
 
+```js
 document.addEventListener('keydown', function (e) {
     // if (!gameInPlay)
     //   return false
@@ -85,7 +92,9 @@ document.addEventListener('keydown', function (e) {
           squares[missileIndex].classList.remove('missile')
           missileIndex -= width
           squares[missileIndex].classList.add('missile')
-
+  }
+}
+```
 
 #### Audio
 I could not get around fixing an audio for my game, with the time period I had but I plan to do so later on.
@@ -94,30 +103,35 @@ I could not get around fixing an audio for my game, with the time period I had b
 
 This function is called upon to pause the game in the event the user decides to go for an errand or takes a break, he or she can come back to the game an begin playing were they left off.
 
+```js
 function pauseMyGame(e){
-    if (e.target.innerHTML === 'PAUSE GAME') {
-      // alienIndex.splice(0, alienIndex.length)
-      // scores = 0
-      // score.innerText = scores
-      clearInterval(intervalId)
-      clearInterval(alienBombInterval)
-      // clearInterval(bombInterval)
-      e.target.innerHTML = 'play'
-    } else if (e.target.innerHTML === 'play') {
-      intervalId = setInterval(moveMyAlien, 500)
-      alienBombInterval = setInterval(alienLaser, 700)
+  if (e.target.innerHTML === 'PAUSE GAME') {
+    // alienIndex.splice(0, alienIndex.length)
+    // scores = 0
+    // score.innerText = scores
+    clearInterval(intervalId)
+    clearInterval(alienBombInterval)
+    // clearInterval(bombInterval)
+    e.target.innerHTML = 'play'
+  } else if (e.target.innerHTML === 'play') {
+    intervalId = setInterval(moveMyAlien, 500)
+    alienBombInterval = setInterval(alienLaser, 700)
 
-      e.target.innerHTML = 'PAUSE GAME'
+    e.target.innerHTML = 'PAUSE GAME'
 
-    }
   }
+}
+```
 
 #### Featured Piece of Code no. 2
 
 This piece of CSS code gives the fonts a space-like digital look, so that whoever is playing the game has the feel of being in space. From /style.css.
-. stop{
-  font-family: 'Geostar', cursive;}
 
+```js
+. stop{
+  font-family: 'Geostar', cursive;
+}
+```
 
 ## Screen Shots
 
@@ -131,7 +145,7 @@ Below is a list of some of the known bugs within the game:
 
 1 Reset Game- Once the game starts and there is a need for the player to restart the game, the restart sometimes causes some Aliens to disappear or it acts as though the Aliens have been killed already by the player. I have a strong sense that this is caused by the .slice.
 
-2 Overlay Screen once the game ends- Once the game ends, there needs to be an overlay window that covers thes screen with an end message and the Aliens stop moving or the board clears. I have a feeling that this has a lot to do with my CSS styling which i need to look into and fix.
+2 Overlay Screen once the game ends- Once the game ends, there needs to be an overlay window that covers the screen with an end message and the Aliens stop moving or the board clears. I have a feeling that this has a lot to do with my CSS styling which i need to look into and fix.
 
 ## Winners and Blockers
 
