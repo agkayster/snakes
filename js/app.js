@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const livesBoard = document.querySelector('.lives span')
   const startGame = document.querySelector('.start')
   // const overlay = document.querySelector('.overlay')
-  // const hidden = document.querySelector('.hidden')
+  const hidden = document.querySelector('.hidden')
   const reset = document.querySelector('.reset')
   const message = document.querySelector('.para')
   const squares = []
@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     makeAlien()
     moveMyAlien()
     lives = 3
+    hidden.classList.remove('endmessage')
     // overlay.style.display = 'none'
     // hidden.style.display = 'none'
     // gameInPlay = true
@@ -93,6 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (lives === 0) {
         console.log('lives', lives)
         endGame()
+        hidden.classList.remove('hidden')
+        hidden.classList.add('endmessage')
         message.textContent = 'You had just one job man!!! Earth has fallen!'
       }
     }
@@ -230,8 +233,12 @@ document.addEventListener('DOMContentLoaded', () => {
   //END GAME IF ALIENS ARE DEAD===================>
   function endGame(){
     if (alienIndex.length === 0){
+      hidden.classList.remove('hidden')
+      hidden.classList.add('endmessage')
       message.textContent = 'Well done!'
     }else if(alienIndex.some(alien => alien >= 110)){
+      hidden.classList.remove('hidden')
+      hidden.classList.add('endmessage')
       message.textContent = 'You lose!'
     }else{
       // message.textContent = 'you win'
