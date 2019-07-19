@@ -4,14 +4,32 @@
    <meta charset="utf-8">
    <title>SEI PROJECT 01</title>
    <link rel="stylesheet" href="css/style.css">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link href="https://fonts.googleapis.com/css?family=Geostar&display=swap" rel="stylesheet">
    <script src="js/app.js" charset="utf-8"></script>
   </head>
     <body>
-      <header>
-        <h1><img class="space" src="https://www.pinclipart.com/picdir/big/178-1780038_space-invaders-space-invaders-font-clipart.png"></h1>
-      </header>
-      <div class="container">
+      <!-- <div class="overlay"><h2>
+      Welcome to Space Invaders
+    </h2>
+    <p>
+      When evil alien invaders attack, it's up to you to defend the planet. Fight off hoards of alien forces before they reach the surface. Only with your help, can the aliens be repelled. You must stop the Space Invaders!
+    </p>
+    <h3>Controls
+    </h3>
+    <p>
+      MOVEMENT: Left and Right Arrow Keys <br>
+      LASER: Space
+    </p></div> -->
+
+        <header>
+          <h1><img class="space" src="https://www.pinclipart.com/picdir/big/178-1780038_space-invaders-space-invaders-font-clipart.png"></h1>
+        </header>
+
+<div class="container">
+        <div class="hidden">
+          <h2 class="para"></h2>
+        </div>
         <div class="startGame">
           <div class="endstop">
           <div class="score">SCORE:<span>0</span></div>
@@ -22,6 +40,7 @@
           <div class="restart">
             <button class="start">START GAME</button>
             <button class="reset">RESET GAME</button>
+            <div class="lives">Lives:<span>3</span></div>
           </div>
         </div>
       </div>
