@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const width = 11
   const stopGame = document.querySelector('.stop')
   const pauseGame = document.querySelector('.pause')
-  const alienStart = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27]
+  const alienStart = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33]
   let userIndex = 115
   let alienIndex = alienStart.slice()
   let intervalId = null
@@ -25,16 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentPlayer = null
   // let gameInPlay = false
   let player = null
-
-
-
-  // const playAudio = document.querySelector('.sound')
-  // let missileId = null
+  //using a let to assign null to the variable player, to use it anywhere we call player
 
 
   // All my variables needed for my code
 
-  //using a let to assign null to the variable player, to use it anywhere we call player
 
   // CREATE GRID ============================================================
   function gridForGame(){
@@ -49,6 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // call back for my grid to be used in my game
   gridForGame()
+
+
+
 
   // Creating a function 'PLAY GAME' to start the Game and putting all relevant callbacks()===========>
   function play(e){
@@ -67,7 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
     collisionInterval = setInterval(alienCollision, 50)
   }
 
-  // MOVING PLAYER FUNCTIONS ===========================================================
+
+
+  // MOVING PLAYER FUNCTIONS ==================================================>
   function moveMyPlayer() {
     //find the player in the user index ID on the Grid and assign it to player
     player = squares.find(square => square.classList.contains('player'))
@@ -77,13 +77,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // for each time 'player' is removed, 'player' has to be added back
   }
 
-  //ALIEN SHOOTING AT PLAYER====================================
+
+
+  //ALIEN SHOOTING AT PLAYER===================================================>
   function alienLaser() {
     const bombIndex = alienIndex[Math.floor(Math.random() * (alienIndex.length-1))]
     alienBombs(bombIndex)
   }
 
-  //ALIEN KILLING PLAYER====================================
+
+  //ALIEN KILLING PLAYER=======================================================>
   function alienCollision() {
     currentPlayer = squares[userIndex]
     if (currentPlayer.classList.contains('bomb')) {
@@ -91,8 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (lives > 0) {
         lives--
         livesBoard.textContent = lives
-      }
-      if (lives === 0) {
+      } else {
         console.log('lives', lives)
         endGame()
         hidden.classList.remove('hidden')
@@ -102,7 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  //MAKE MY ALIENS ==============================================================
+
+  //MAKE MY ALIENS ============================================================>
   function makeAlien (){
     alienIndex.forEach(alienIndex => {
       squares[alienIndex].classList.add('alien')
@@ -113,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-  // MOVE ALIENS FUNCTIONS ============================================================
+  // MOVE ALIENS FUNCTIONS ====================================================>
   function moveMyAlien(){
     // using a 'forEach' to check for aliens in the square and move them
     squares.forEach(square => square.classList.remove('alien'))
@@ -134,25 +137,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // Ensure that when aliens reach the end, the drop down a square synchronously
     if((atLeftEdge && direction === -1) || (atRigthEdge && direction === 1)){
       direction = width
-    }else if (direction === width) {
+    } else if (direction === width) {
       if (atLeftEdge) direction = 1
       else direction = -1
-
     }
   }
 
   // moveMyAlien()
+
 
   //MAKE ALIEN BOMBS===========================================================>
   function alienBombs(bombIndex){
     let alienBombIndex = bombIndex + width
     let alienBomb = squares[alienBombIndex]
     const bombInterval = setInterval(() => {
-      if (alienBomb)
+      if (alienBomb) {
         alienBomb.classList.remove('bomb')
-      if (alienBombIndex + width >= width ** 2)
+      }
+
+      if (alienBombIndex + width >= width ** 2) {
         clearInterval(bombInterval)
-      else if (alienBomb) {
+      } else if (alienBomb) {
         alienBombIndex += width
         alienBomb = squares[alienBombIndex]
         alienBomb.classList.add('bomb')
@@ -160,11 +165,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 50)
   }
 
-  //================================================> Event listener to start game
+  //Event listener to start game===============================================>
   startGame.addEventListener('click', play)
 
 
-  //RESET GAME==========================================================>
+  //RESET GAME=================================================================>
   reset.addEventListener('click', () => {
     alienIndex = alienStart.slice()
     makeAlien()
@@ -179,7 +184,8 @@ document.addEventListener('DOMContentLoaded', () => {
     collisionInterval = setInterval(alienCollision, 50)
   })
 
-  // MISSILE MOVEMENT ==========================================================
+
+  // MISSILE MOVEMENT ========================================================>
 
   document.addEventListener('keydown', function (e) {
     let missileIndex = userIndex
@@ -191,7 +197,9 @@ document.addEventListener('DOMContentLoaded', () => {
           squares[missileIndex].classList.add('missile')
         } else {
           squares[missileIndex].classList.remove('missile')
-        } if(squares[missileIndex].classList.contains('alien')) {
+        }
+
+        if(squares[missileIndex].classList.contains('alien')) {
           squares[missileIndex].classList.remove('missile', 'alien')
           clearInterval(missileId)
           const newAlienIndex = alienIndex.indexOf(missileIndex)
@@ -203,12 +211,12 @@ document.addEventListener('DOMContentLoaded', () => {
           // hidden.style.display = 'flex'
 
         }
-      }, 200)
+      }, 100)
     }
   })
 
 
-  // =========================================> Event Listener for moveMyPlayer
+  // Event Listener for moveMyPlayer=========================================>
   document.addEventListener('keydown', function (e) {
     // if (!gameInPlay)
     //   return false
@@ -231,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
 
-  //END GAME IF ALIENS ARE DEAD===================>
+  //END GAME IF ALIENS ARE DEAD================================================>
   function endGame(){
     if (alienIndex.length === 0){
       hidden.classList.remove('hidden')
@@ -241,8 +249,6 @@ document.addEventListener('DOMContentLoaded', () => {
       hidden.classList.remove('hidden')
       hidden.classList.add('endmessage')
       message.textContent = 'You lose, "cmd" + "R" to play again!'
-    }else{
-      // message.textContent = 'you win'
     }
 
     // clearInterval(collisionInterval)
@@ -253,10 +259,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   }
 
-  //================================================> Event listener to stop game
+  //Event listener to stop game================================================>
   stopGame.addEventListener('click', stopMyGame)
 
-  //STOP GAME==========================================>
+
+  //STOP GAME==================================================================>
   function stopMyGame(){
     alienIndex.splice(0, alienIndex.length)
     // alienIndex = alienStart.slice()
@@ -269,10 +276,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // stopMyGame()
 
-  //================================================> Event listener to pause game
+
+  //Event listener to pause game===============================================>
   pauseGame.addEventListener('click', pauseMyGame)
 
-  //PAUSE GAME========================================>
+
+  //PAUSE GAME=================================================================>
   function pauseMyGame(e){
     if (e.target.innerHTML === 'PAUSE GAME') {
       // alienIndex.splice(0, alienIndex.length)
