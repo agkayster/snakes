@@ -157,6 +157,7 @@ Below is a list of some of the known bugs within the game:
 One of the problems I faced was trying to write a code to make sure the Aliens can fire bombs back at the Player while ensuring that the bullets from the Aliens and the Player do not go in the wrong trajectory. I also had the challenge of the tying the bombs hitting the player to the number of lives attributed to the player, so that when a bomb hits it, it takes away one life.
 The biggest win, by far, was the amount of confidence I gained working with JavaScript during this project. I got the opportunity to apply my new learnings in a real-world project and achieved more than I thought I could on my own, while helping me to understand fully everything we have been taught so far.
 
+
 ## Future Content
 
 Along with adding the shooting functionality, there are a number of potential future features I'd like to implement, such as:
@@ -170,3 +171,11 @@ Along with adding the shooting functionality, there are a number of potential fu
 7. Ability for the player to earn rewards based on the number of Aliens killed in different difficulty levels.
 8. Ability to allow players share their score and experiences online.
 9. And much more!
+
+## What I learnt
+Major learning points:
+* Carrying out Git add, Git commit and Git push origin master
+* Using EventListeners and creating events
+* Using google for research and knowing when to ask questions
+* Coding with JavaScript and Index.html.
+* Styling with CSS as a beginner.
